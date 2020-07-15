@@ -6,6 +6,11 @@ namespace TodoApi.Repositories
 {
     public class MockTodoItemRepository : ITodoItemRepository
     {
+        public void CreateTodoItem(TodoItem todoItem)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<TodoItem> GetAllTodoItems()
         {
             return new List<TodoItem> {
@@ -35,6 +40,16 @@ namespace TodoApi.Repositories
                 CreationDate = new DateTime(2020, 07, 13, 10, 28, 10),
                 IsComplete = false,
             };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTodoItem(TodoItem todoItem)
+        {
+            throw new NotImplementedException();
         }
     }
 }

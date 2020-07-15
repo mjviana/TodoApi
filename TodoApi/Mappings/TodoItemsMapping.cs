@@ -10,6 +10,7 @@ namespace TodoApi.Mappings
         {
             CreateMap<TodoItem, TodoItemDto>();
             CreateMap<TodoItemDto, TodoItem>();
+            CreateMap<TodoItemUpdateDto, TodoItem>();
         }
     }
 }

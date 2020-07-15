@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TodoApi.Dtos
 {
@@ -12,6 +12,7 @@ namespace TodoApi.Dtos
         /// <summary>
         /// Name of the todo item
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>

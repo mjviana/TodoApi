@@ -35,7 +35,7 @@ namespace TodoApi.Controllers
             return Ok(_mapper.Map<IEnumerable<TodoItemDto>>(todoItems));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTodoItem")]
         public ActionResult<TodoItemDto> GetTodoItem(int id)
         {
             var todoItem = _todoItemRepository.GetTodoItemById(id);
@@ -44,6 +44,39 @@ namespace TodoApi.Controllers
                 return NotFound();
 
             return Ok(_mapper.Map<TodoItemDto>(todoItem));
+        }
+
+        [HttpPost]
+        public ActionResult<TodoItemDto> CreateTodoItem(TodoItemDto todoItem)
+        {
+            var todoItemModel = _mapper.Map<TodoItem>(todoItem);
+
+            _todoItemRepository.CreateTodoItem(todoItemModel);
+            _todoItemRepository.SaveChanges();
+
+            var todoItemDto = _mapper.Map<TodoItemDto>(todoItemModel);
+
+            return CreatedAtRoute(nameof(GetTodoItem), new { todoItemDto.Id }, todoItemDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateTodoItem(int id, TodoItemUpdateDto todoItemUpdate)
+        {
+            var todoItemModel = _todoItemRepository.GetTodoItemById(id);
+
+            if (todoItemModel == null)
+            {
+                return NotFound();
+            }
+
+            // Updates the model from the repository, with the values of the dto object that was sent
+            _mapper.Map(todoItemUpdate, todoItemModel);
+
+            _todoItemRepository.UpdateTodoItem(todoItemModel);
+
+            _todoItemRepository.SaveChanges();
+
+            return NoContent();
         }
     }
 }
