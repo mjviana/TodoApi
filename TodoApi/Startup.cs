@@ -23,7 +23,8 @@ namespace TodoApi
         {
             services.AddDbContext<TodoContext>(opt =>opt.UseSqlServer(Configuration.GetConnectionString("TodoConnectionString")));
 
-            services.AddScoped<ITodoItemRepository, MockTodoItemRepository>();
+            //services.AddScoped<ITodoItemRepository, MockTodoItemRepository>();
+            services.AddScoped<ITodoItemRepository, TodoItemRepositrory>();
             services.AddControllers();
         }
 
